@@ -23,4 +23,16 @@ def get_news():
     return news_results
 
 
-# def process_results(news_list):
+def process_results(news_list):
+    
+    news_results = []
+    for news_item in news_list:
+        uid = news_item.get('id')
+        name = news_item.get('name')
+        author = news_item.get('author')
+        title = news_item.get('title')
+        description = news_item.get('description')
+        url = news_item.get('url')
+        urltoimage =news_item.get('urltoimage')
+        time = news_item.get('time')
+        content = news_item.get('content')
