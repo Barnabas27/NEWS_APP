@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    {%if title%}
-    <title> {{ title }} </title>
-    {% else %}
-    <title> Welcome to the coffee news</title>
-    {% endif %}
-</head>
-<body>
-    
-</body>
-</html>
+{% extends 'base.html'}
+{% import 'macros.html' as macro% }
+{%block content%}
+<h3> POPULAR NEWS</h3>
+<ul>
+    {{macro.displayNews(popular)}}
+</ul>
+{%endblock%}
