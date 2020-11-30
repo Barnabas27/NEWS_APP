@@ -1,8 +1,10 @@
-{% extends 'base.html'}
-{% import 'macros.html' as macro% }
-{%block content%}
-<h3> POPULAR NEWS</h3>
+{% extends 'base.html' %}
+{% import 'macros.html' as macro %}
+{% block content %}
+<h3>
+    POPULAR NEWS
+</h3>
 <ul>
     {{macro.displayNews(popular)}}
 </ul>
-{%endblock%}
+{% endblock %}
