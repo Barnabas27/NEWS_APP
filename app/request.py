@@ -69,3 +69,17 @@ def get_new(title):
             
             news_object = news(id,name,author,title,description,url,urlToImage,time,content)
     return news_object        
+
+
+def search_news(news_title):
+    search_news_url = 'https://newsapi.org/v2/everything?q=a&apiKey={}'.format(api_key)
+    with urllib.request.urlopen(search_news_url)as url:
+        search_news_data = url.read()
+        search_news_response = json.loads(search_news_data)
+        
+        search_news_results = None
+        
+        if search_news_results['results']:
+            search_news_list = search_news_response['results']
+            search_news_results = process_results(searc_news_list)
+        return search_news_results    
