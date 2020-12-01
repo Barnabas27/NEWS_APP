@@ -1,0 +1,32 @@
+{%extends 'base.html'%}
+{% block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles</title>
+</head>
+<body>
+    <div class="jumbotron">
+        <div class="overlay">
+            <h1 class="text-dark txt text-center text-bold">{{source}}ARTICLES</h1>
+        </div>
+    </div>
+    <div class="card-columns">
+        {%for news in news%}
+        <div class="card">
+            <img src="{{news.urlToImage}}" alt="" width='500px' class= "card-img-top">
+            <div class="card-body">
+                <h4>{{news.title}}</h4>
+            </div>
+            <div class="card-body">
+                <p>{{news.description}}</p>
+                <a href="{{news.url}}">Read More</a>
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+</body>
+</html>
+{%endblock%}

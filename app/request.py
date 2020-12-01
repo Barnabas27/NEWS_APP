@@ -1,12 +1,22 @@
-from app import app
+# from app import create_app
 import urllib.request,json
-from .models import news
+from .news import Source,Article
+api_key = None
+# ('b4413de8da704a07811ac7a746c9f70b')
+base_url =None
+article_url= None
+#  app.config['NEWS_API_BASE_URL']
 
-api_key = ('b4413de8da704a07811ac7a746c9f70b')
-base_url = app.config['NEWS_API_BASE_URL']
-
-def get_news(articles):
-    get_news_url = base_url.format(api_key)
+def configure_request(app):
+    global api_key,base_url,article_url
+    api_key = app.config['NEWS_API_KEY']
+    base_url = app.config['NEWS_API_BASE_URL']
+    article_url = app.config['ARTICLE_API_BASE_URL']
+    
+    
+def get_news(category):
+    
+    get_news_url = base_url.format(category,api_key)
     
     with urllib.request.urlopen(get_news_url) as url:
         
@@ -15,37 +25,30 @@ def get_news(articles):
         
         news_results = None
         
-        if get_news_response['articles']:
-            news_results_list = get_news_response['articles']
+        if get_news_response['sources']:
+            news_results_list = get_news_response['sources']
             news_results = process_results(news_results_list)
-            
-    # print('xxxxxxxxxxxxxxxxxxxxxxxxxx')
-    # print(get_news_url)
-    # print('xxxxxxxxxxxxxxxxxxxxxxxxxx')
-    # print(get_news_data)
-    # print('xxxxxxxxxxxxxxxxxxxxxxxxxx')
-    # print(news_results_list)
-    # print('xxxxxxxxxxxxxxxxxxxxxxxxxx')
-    # print(news_results)
-    # print('vvvvvvvvvvvvvvvvvvvvvvv')
-            
-            
-    return news_results_list
+  
+    return news_results
 
 
 def process_results(news_list):
     
     news_results = []
     for news_item in news_list:
-        uid = news_item.get('id')
+        id = news_item.get('id')
         name = news_item.get('name')
-        author = news_item.get('author')
-        title = news_item.get('title')
         description = news_item.get('description')
+       
         url = news_item.get('url')
-        urlToImage =news_item.get('urlToImage')
-        time = news_item.get('time')
-        content = news_item.get('content')
+        category = news_item.get('category')
+        
+        country =news_item.get('country')
+        
+        source_object = Source(id,name,description,url,category,country)
+        news_results.append(source_object)
+        
+       
         
     return news_results
         
@@ -63,7 +66,7 @@ def get_new(title):
             title = news_item.response('title')
             description = news_item.response('description')
             url = news_item.response('url')
-            # urlToImage =news_item.response('urlToImage')
+           
             time = news_item.response('time')
             content = news_item.response('content')
             

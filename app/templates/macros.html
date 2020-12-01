@@ -1,38 +1,21 @@
-<!-- {% macro displayNews(news_list) %}
-    {%for news in news_list %}
-        <h3>{{news.title}}</h3>
-        <li>{{news.author}}</li>
-        <img src = "{{urlToImage}}">
-        <li>{{news.publishedAt}}</li>
-        <li>{{news.content}}</li>
-    {% endfor %}
-{% endmacro %} -->
-{%macro displaysNews(news_list)%}
-    {%for news in news_list%}
-        <li>{{news.id}}</li>
-        <li>{{news.name}}</li>
-    {%endfor%}
-{% endmacro %}
-
-{%macro diplayNews(news_list)%}
-    {%for news in news_list%}
-        <h3>{{news.title}}</h3>
-        <li>{{ news.author}}</li>
-        <li>{{news.publishedAt}}</li>
-        <li><a href="{{news.url}}"></a>More</li>
-<!-- <li>{{news.description}}</li> -->
-        <!-- <img src="{{news.urlToImage}}" alt=""> -->
-        <li>{{news.content}}</li>
-    {%endfor%}
-{%endmacro%}
-
 {%macro displayNews(news_list) %}
+    <div class="container">
+        <div class="row">
     {%for news in news_list%}
-    <div class="col-md-12 news-card">
-        <img src="{{news.urlToImage}}" alt="{{news.title}}" class = 'img-responsive'>
-        <li class="text-center">
-            <a href = "/news/{{news.id}}">{{news.title}}</a>
-        </li>
-    </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <div class="card" style="width: 40rem;">
+                <img src="{{news.urlToImage}}" class="card-img-top" alt="{{news.title}}" width="300vw">
+                <div class="card-body background-color: black;">
+                  <h5 class="card-title">{{news.title}}</h5>
+                  <p class="card-text">{{news.description}}</p>
+                  <a href="{{news.url}}" class="btn btn-primary">{{news.name}}</a>
+                </div>
+            </div>
+        </div>
     {%endfor%}
+        </div>
+    </div>
+    
+    
+    
 {%endmacro%}
