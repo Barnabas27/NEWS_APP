@@ -1,4 +1,4 @@
-#NEWS_APP
+# NEWS_APP
 NEWS_APP is simply a flask app that uses News-API to retrieve sources of news reporting and enables the user to choose from what reporting media house they would prefer from the given categories available.
 
 ## REQUIREMENTS.
